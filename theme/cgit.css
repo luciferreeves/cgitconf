@@ -1,0 +1,1405 @@
+/* ===========================================================
+   Shifoo's Personal CGit Theme. Copy this and you are gay!
+   =========================================================== */
+
+/* ---------- Base ---------- */
+html, body {
+  background: #000000 !important;
+  color: #ffffff !important;
+  margin: 0;
+  padding: 0;
+  font-family: "MS Gothic", "Osaka", "Courier New", monospace;
+  line-height: 1.4;
+}
+
+h1 {
+  margin: 8px 0;
+  padding: 0 10px;
+}
+
+p {
+  font-size: 13px;
+  padding: 0 10px;
+}
+
+ul {
+  font-size: 13px;
+}
+
+:root {
+  --bg: #000000;
+  --surface: #0a0a0f;
+  --panel: #15151a;
+  
+  --aqua: #00e5ff;
+  --pink: #ff6b9d;
+  --lilac: #b084ff;
+  --yellow: #ffeb3b;
+  --mint: #00ff9f;
+  --peach: #ff9e80;
+  --cyan: #00ffff;
+  --magenta: #ff00ff;
+  
+  --text: #ffffff;
+  --text-dim: #a0a0a0;
+  --border: #00e5ff;
+  
+  --mono: "MS Gothic", "Osaka", "Courier New", monospace;
+}
+
+/* Transparent syntax highlighting */
+.highlight,
+.highlight * {
+  background: transparent !important;
+}
+
+/* ---------- Main Container ---------- */
+div#cgit {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 10px;
+  background: var(--bg);
+}
+
+/* ---------- Header ---------- */
+div#cgit table#header {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 3px solid var(--aqua);
+  background: var(--surface);
+  padding: 8px;
+}
+
+div#cgit table#header td.logo {
+  width: 80px;
+  vertical-align: middle;
+  padding: 0 10px 0 0;
+}
+
+div#cgit table#header td.logo img {
+  width: 64px;
+  height: 64px;
+  border: 3px solid var(--pink);
+  image-rendering: pixelated;
+}
+
+div#cgit table#header td.main {
+  font-size: 32px;
+  font-weight: 900;
+  padding: 0;
+  color: var(--aqua) !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+div#cgit table#header td.main a {
+  color: var(--aqua) !important;
+  text-decoration: none;
+  text-shadow: 2px 2px 0 var(--pink);
+}
+
+div#cgit table#header td.main a:hover {
+  color: var(--pink) !important;
+  text-shadow: 2px 2px 0 var(--aqua);
+}
+
+div#cgit table#header td.form {
+  text-align: right;
+  vertical-align: middle;
+  padding: 5px;
+}
+
+div#cgit table#header td.form input,
+div#cgit table#header td.form select {
+  background: #000;
+  color: var(--aqua) !important;
+  border: 2px solid var(--aqua);
+  padding: 4px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+div#cgit table#header td.form input:focus,
+div#cgit table#header td.form select:focus {
+  outline: none;
+  border-color: var(--pink);
+  color: var(--pink) !important;
+}
+
+div#cgit table#header td.sub {
+  color: var(--mint) !important;
+  padding: 8px 0 0 0;
+  border-top: 2px solid var(--mint);
+  margin-top: 8px;
+  font-size: 11px;
+}
+
+/* ---------- Navigation Tabs (HORIZONTAL) ---------- */
+div#cgit table.tabs {
+  width: 100%;
+  margin: 10px 0 0 0;
+  background: var(--surface);
+  border: 3px solid var(--lilac);
+  border-collapse: collapse;
+}
+
+div#cgit table.tabs tbody {
+  display: table;
+  width: 100%;
+}
+
+div#cgit table.tabs tr {
+  display: table-row;
+}
+
+div#cgit table.tabs td {
+  display: table-cell;
+  padding: 0;
+  border-right: 2px solid var(--lilac);
+  vertical-align: middle;
+}
+
+div#cgit table.tabs td:last-child {
+  border-right: none;
+}
+
+div#cgit table.tabs td a {
+  padding: 8px 16px;
+  color: var(--lilac) !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: var(--surface);
+  border: none;
+}
+
+div#cgit table.tabs td a:hover {
+  background: var(--lilac);
+  color: #000 !important;
+}
+
+div#cgit table.tabs td a.active {
+  background: var(--lilac);
+  color: #000 !important;
+  font-weight: 900;
+}
+
+div#cgit table.tabs td a[href^="http://"]:after,
+div#cgit table.tabs a[href^="https://"]:after {
+  content: " ↗";
+  font-size: 10px;
+}
+
+div#cgit table.tabs td.form {
+  text-align: right;
+  padding: 4px 8px;
+  border: none;
+}
+
+div#cgit table.tabs td.form input,
+div#cgit table.tabs td.form select {
+  background: #000;
+  color: var(--lilac) !important;
+  border: 2px solid var(--lilac);
+  padding: 4px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+}
+
+/* ---------- Path ---------- */
+div#cgit div.path {
+  margin: 10px 0;
+  padding: 6px 10px;
+  background: var(--panel);
+  border-left: 5px solid var(--mint);
+  color: var(--mint) !important;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---------- Content ---------- */
+div#cgit div.content {
+  margin: 10px 0;
+  padding: 0px;
+  background: var(--surface);
+  border: 3px solid var(--border);
+}
+
+/* ---------- Links ---------- */
+div#cgit a {
+  color: var(--cyan) !important;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+div#cgit a:hover {
+  color: var(--pink) !important;
+  text-decoration: underline;
+}
+
+div#cgit a:visited {
+  color: var(--lilac) !important;
+}
+
+/* ---------- Lists ---------- */
+div#cgit table.list {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  background: var(--panel);
+  /* border: 2px solid var(--aqua); */
+}
+
+div#cgit table.list tr {
+  background: var(--panel);
+  border-bottom: 1px solid #1a1a1f;
+}
+
+div#cgit table.list tr:hover {
+  background: #1a1a25;
+}
+
+div#cgit table.list tr.nohover:hover {
+  background: var(--panel);
+}
+
+div#cgit table.list th {
+  padding: 6px 8px;
+  text-align: left;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--aqua) !important;
+  background: #000;
+  border-bottom: 2px solid var(--aqua);
+}
+
+div#cgit table.list td {
+  padding: 0px 8px;
+  border: none;
+  vertical-align: middle;
+  color: var(--text) !important;
+}
+
+div#cgit table.list td.commitgraph {
+  font-family: var(--mono);
+  white-space: pre;
+  color: var(--text-dim) !important;
+  background: #000;
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+div#cgit table.list td.commitgraph .column1 { color: #ff4444 !important; }
+div#cgit table.list td.commitgraph .column2 { color: #44ff44 !important; }
+div#cgit table.list td.commitgraph .column3 { color: #ffff44 !important; }
+div#cgit table.list td.commitgraph .column4 { color: #4444ff !important; }
+div#cgit table.list td.commitgraph .column5 { color: #ff44ff !important; }
+div#cgit table.list td.commitgraph .column6 { color: #44ffff !important; }
+
+div#cgit table.list td.logsubject {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--lilac) !important;
+  font-size: 12px;
+}
+
+div#cgit table.list td.logmsg {
+  font-family: var(--mono);
+  white-space: pre;
+  padding: 6px 8px;
+  color: var(--text-dim) !important;
+  background: #000;
+  font-size: 11px;
+}
+
+div#cgit table.list td a:not(.deco):not(.tag-deco):not(.branch-deco):not(.ls-dir):not(.ls-blob) {
+  color: var(--cyan) !important;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+div#cgit table.list td a:hover {
+  color: var(--pink) !important;
+  text-decoration: underline;
+}
+
+div#cgit table.list td a.ls-dir {
+  font-weight: 900;
+  color: var(--yellow) !important;
+}
+
+div#cgit table.list td a.ls-dir:hover {
+  color: var(--peach) !important;
+}
+
+div#cgit table.list td a.ls-dir:before {
+  content: "[DIR] ";
+}
+
+div#cgit table.list td a.ls-blob:before {
+  content: "[FILE] ";
+  opacity: 0.6;
+}
+
+div#cgit table.list td.reposection {
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--peach) !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 8px;
+  background: #000;
+  border-left: 5px solid var(--peach);
+  border-top: 2px solid var(--peach);
+  border-bottom: 2px solid var(--peach);
+}
+
+div#cgit table.list td.sublevel-repo {
+  padding-left: 24px;
+}
+
+/* ---------- Summary ---------- */
+div#cgit div#summary {
+  background: var(--panel);
+  border: 2px solid var(--pink);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* ---------- Commit Info ---------- */
+div#cgit table.commit-info {
+  width: 100%;
+  margin: 10px 0;
+  background: var(--panel);
+  border: 2px solid var(--aqua);
+  border-collapse: collapse;
+}
+
+div#cgit table.commit-info th {
+  text-align: left;
+  font-weight: 700;
+  padding: 6px 10px;
+  color: var(--aqua) !important;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  vertical-align: top;
+  width: 100px;
+  background: #000;
+}
+
+div#cgit table.commit-info td {
+  padding: 6px 10px;
+  color: var(--text) !important;
+  font-size: 12px;
+}
+
+div#cgit div.commit-subject {
+  font-weight: 900;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 10px;
+  background: #000;
+  border-left: 5px solid var(--peach);
+  color: var(--peach) !important;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+div#cgit div.commit-msg {
+  white-space: pre-wrap;
+  font-family: var(--mono);
+  padding: 10px;
+  background: var(--panel);
+  border: 2px solid var(--mint);
+  color: var(--text) !important;
+  line-height: 1.5;
+  margin: 10px 0;
+  font-size: 12px;
+}
+
+/* ---------- Blob/Code Display ---------- */
+div#cgit div#blob {
+  background: #000;
+  border: 2px solid var(--cyan);
+  padding: 0;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+div#cgit table.blob {
+  width: 100%;
+  margin: 0;
+  background: #000;
+  border-collapse: collapse;
+}
+
+div#cgit table.blob td.linenumbers {
+  background: var(--panel);
+  padding: 6px 6px;
+  text-align: right;
+  border-right: 2px solid var(--cyan);
+  color: var(--text-dim) !important;
+  font-family: var(--mono);
+  font-size: 11px;
+  user-select: none;
+  vertical-align: top;
+  width: 40px;
+}
+
+div#cgit table.blob td.linenumbers a {
+  color: var(--text-dim) !important;
+  text-decoration: none;
+}
+
+div#cgit table.blob td.linenumbers a:hover {
+  color: var(--cyan) !important;
+  background: #1a1a1f;
+}
+
+div#cgit table.blob td.lines {
+  padding: 4px 8px;
+  vertical-align: top;
+  color: var(--text) !important;
+}
+
+div#cgit table.blob pre {
+  margin: 0;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text) !important;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* ---------- Syntax Highlighting (Y2K Style) ---------- */
+div#cgit .highlight pre {
+  line-height: 1.4;
+  background: transparent !important;
+}
+
+div#cgit .highlight .hll { background-color: rgba(255,255,0,0.2) !important; }
+div#cgit .highlight .c { color: #888888 !important; } /* Comment */
+div#cgit .highlight .err { color: #ff6b9d !important; background-color: transparent !important; } /* Error */
+div#cgit .highlight .k { color: #00e5ff !important; font-weight: bold; } /* Keyword */
+div#cgit .highlight .ch,
+div#cgit .highlight .cm,
+div#cgit .highlight .cpf,
+div#cgit .highlight .c1 { color: #888888 !important; } /* Comments */
+div#cgit .highlight .cp { color: #ff9e80 !important; font-weight: bold; } /* Comment.Preproc */
+div#cgit .highlight .cs { color: #ff9e80 !important; font-weight: bold; background-color: transparent !important; }
+div#cgit .highlight .gd { color: #ff6b9d !important; background-color: transparent !important; } /* Generic.Deleted */
+div#cgit .highlight .ge { font-style: italic; }
+div#cgit .highlight .ges { font-weight: bold; font-style: italic; }
+div#cgit .highlight .gr { color: #ff6b9d !important; }
+div#cgit .highlight .gh { color: #b084ff !important; }
+div#cgit .highlight .gi { color: #00ff9f !important; background-color: transparent !important; } /* Generic.Inserted */
+div#cgit .highlight .go { color: #888888 !important; }
+div#cgit .highlight .gp { color: #00e5ff !important; }
+div#cgit .highlight .gs { font-weight: bold; }
+div#cgit .highlight .gu { color: #b084ff !important; }
+div#cgit .highlight .gt { color: #ff6b9d !important; }
+div#cgit .highlight .kc,
+div#cgit .highlight .kd,
+div#cgit .highlight .kn { color: #00e5ff !important; font-weight: bold; }
+div#cgit .highlight .kp { color: #00e5ff !important; }
+div#cgit .highlight .kr { color: #00e5ff !important; font-weight: bold; }
+div#cgit .highlight .kt { color: #ffeb3b !important; font-weight: bold; }
+div#cgit .highlight .m { color: #b084ff !important; font-weight: bold; } /* Numbers */
+div#cgit .highlight .s { color: #ff9e80 !important; background-color: transparent !important; } /* Strings */
+div#cgit .highlight .na { color: #00ff9f !important; }
+div#cgit .highlight .nb { color: #00ffff !important; }
+div#cgit .highlight .nc { color: #ffeb3b !important; font-weight: bold; }
+div#cgit .highlight .no { color: #ff6b9d !important; font-weight: bold; }
+div#cgit .highlight .nd { color: #b084ff !important; }
+div#cgit .highlight .ne { color: #ff6b9d !important; font-weight: bold; }
+div#cgit .highlight .nf { color: #00ffff !important; font-weight: bold; }
+div#cgit .highlight .nl { color: #00ff9f !important; font-style: italic; }
+div#cgit .highlight .nn { color: #ffeb3b !important; font-weight: bold; }
+div#cgit .highlight .py { color: #00ff9f !important; font-weight: bold; }
+div#cgit .highlight .nt { color: #00e5ff !important; font-weight: bold; }
+div#cgit .highlight .nv { color: #b084ff !important; }
+div#cgit .highlight .ow { color: #00e5ff !important; }
+div#cgit .highlight .w { color: #666666 !important; }
+div#cgit .highlight .mb,
+div#cgit .highlight .mf,
+div#cgit .highlight .mh,
+div#cgit .highlight .mi,
+div#cgit .highlight .mo,
+div#cgit .highlight .il { color: #b084ff !important; font-weight: bold; }
+div#cgit .highlight .sa,
+div#cgit .highlight .sb,
+div#cgit .highlight .sc,
+div#cgit .highlight .dl,
+div#cgit .highlight .sd,
+div#cgit .highlight .s2,
+div#cgit .highlight .sh,
+div#cgit .highlight .s1 { color: #ff9e80 !important; background-color: transparent !important; }
+div#cgit .highlight .se { color: #ffeb3b !important; background-color: transparent !important; }
+div#cgit .highlight .si { color: #b084ff !important; background-color: transparent !important; }
+div#cgit .highlight .sx { color: #00ff9f !important; background-color: transparent !important; }
+div#cgit .highlight .sr { color: #ff6b9d !important; background-color: transparent !important; }
+div#cgit .highlight .ss { color: #ffeb3b !important; background-color: transparent !important; }
+div#cgit .highlight .bp { color: #00ffff !important; }
+div#cgit .highlight .fm { color: #00ffff !important; font-weight: bold; }
+div#cgit .highlight .vc,
+div#cgit .highlight .vm { color: #b084ff !important; }
+div#cgit .highlight .vg { color: #ff9e80 !important; }
+div#cgit .highlight .vi { color: #b084ff !important; }
+
+/* ---------- Diff Display ---------- */
+div#cgit table.diff {
+  width: 100%;
+  background: #000;
+  border: 2px solid var(--magenta);
+  margin: 10px 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  border-collapse: collapse;
+}
+
+div#cgit table.diff td {
+  padding: 2px 8px;
+  white-space: pre;
+  color: var(--text) !important;
+  line-height: 1.4;
+}
+
+div#cgit table.diff td div.head {
+  font-weight: 900;
+  margin: 8px 0;
+  padding: 6px 8px;
+  background: var(--peach);
+  color: #000 !important;
+  border: 2px solid var(--peach);
+  text-transform: uppercase;
+}
+
+div#cgit table.diff td div.hunk {
+  color: var(--cyan) !important;
+  background: rgba(0,255,255,0.1);
+  padding: 4px 8px;
+  margin: 4px 0;
+  border-left: 3px solid var(--cyan);
+  font-weight: 700;
+}
+
+div#cgit table.diff td div.add {
+  background: rgba(0,255,159,0.15);
+  color: var(--mint) !important;
+  padding: 2px 8px;
+  margin: 1px 0;
+  border-left: 3px solid var(--mint);
+}
+
+div#cgit table.diff td div.del {
+  background: rgba(255,50,50,0.25);
+  color: var(--pink) !important;
+  padding: 2px 8px;
+  margin: 1px 0;
+  border-left: 3px solid var(--pink);
+}
+
+/* ---------- Diffstat ---------- */
+div#cgit div.diffstat-header {
+  font-weight: 900;
+  font-size: 16px;
+  padding: 10px 0;
+  color: var(--yellow) !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--yellow);
+}
+
+div#cgit table.diffstat {
+  width: 100%;
+  background: var(--panel);
+  border: 2px solid var(--yellow);
+  margin: 10px 0;
+  border-collapse: collapse;
+}
+
+div#cgit table.diffstat th {
+  background: #000;
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--yellow) !important;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--yellow);
+}
+
+div#cgit table.diffstat td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #1a1a1f;
+  color: var(--text) !important;
+  font-size: 12px;
+}
+
+div#cgit table.diffstat tr:hover {
+  background: #1a1a25;
+}
+
+div#cgit table.diffstat td.add a { 
+  color: var(--mint) !important;
+  font-weight: 700;
+}
+
+div#cgit table.diffstat td.del a { 
+  color: var(--pink) !important;
+  font-weight: 700;
+}
+
+div#cgit table.diffstat td.upd a { 
+  color: var(--cyan) !important;
+  font-weight: 700;
+}
+
+div#cgit table.diffstat td.graph {
+  width: 200px;
+}
+
+div#cgit table.diffstat td.graph table {
+  border: 2px solid #1a1a1f;
+  background: #000;
+  height: 10px;
+}
+
+div#cgit table.diffstat td.graph td {
+  padding: 0;
+  border: 0;
+  height: 10px;
+}
+
+div#cgit table.diffstat td.graph td.add {
+  background: var(--mint);
+}
+
+div#cgit table.diffstat td.graph td.rem {
+  background: var(--pink);
+}
+
+div#cgit div.diffstat-summary {
+  color: var(--text-dim) !important;
+  padding: 8px 10px;
+  font-size: 11px;
+}
+
+/* ---------- Diff Options Panel ---------- */
+div#cgit div.cgit-panel {
+  float: right;
+  margin: 10px 0 10px 10px;
+  background: var(--panel);
+  border: 2px solid var(--yellow);
+  padding: 10px;
+}
+
+div#cgit div.cgit-panel b {
+  color: var(--yellow) !important;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+div#cgit div.cgit-panel table {
+  border-collapse: collapse;
+  background: transparent;
+  border: none;
+}
+
+div#cgit div.cgit-panel th {
+  text-align: center;
+  color: var(--yellow) !important;
+  padding: 4px;
+}
+
+div#cgit div.cgit-panel td {
+  padding: 4px;
+  color: var(--text) !important;
+}
+
+div#cgit div.cgit-panel td.label {
+  padding-right: 8px;
+  color: var(--aqua) !important;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+div#cgit div.cgit-panel td.ctrl {
+  padding-left: 4px;
+}
+
+div#cgit div.cgit-panel select,
+div#cgit div.cgit-panel input[type="submit"] {
+  background: #000;
+  color: var(--yellow) !important;
+  border: 2px solid var(--yellow);
+  padding: 4px 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+div#cgit div.cgit-panel select:focus,
+div#cgit div.cgit-panel input[type="submit"]:focus {
+  outline: none;
+  border-color: var(--aqua);
+  color: var(--aqua) !important;
+}
+
+div#cgit div.cgit-panel input[type="submit"] {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+div#cgit div.cgit-panel input[type="submit"]:hover {
+  background: var(--yellow);
+  color: #000 !important;
+}
+
+/* ---------- Side-by-Side Diff ---------- */
+div#cgit table.ssdiff {
+  width: 100%;
+  background: #000;
+  border: 2px solid var(--magenta);
+  margin: 10px 0;
+  border-collapse: collapse;
+}
+
+div#cgit table.ssdiff td {
+  font-family: var(--mono);
+  font-size: 11px;
+  white-space: pre;
+  padding: 2px 8px;
+  border-left: 1px solid #1a1a1f;
+  border-right: 1px solid #1a1a1f;
+  color: var(--text) !important;
+  line-height: 1.4;
+  vertical-align: top;
+}
+
+div#cgit table.ssdiff td.add {
+  background: rgba(0,255,159,0.1);
+  color: var(--text) !important;
+}
+
+div#cgit table.ssdiff td.add_dark {
+  background: rgba(0,255,159,0.05);
+  color: var(--text) !important;
+}
+
+div#cgit table.ssdiff span.add {
+  background: rgba(0,255,159,0.3);
+  color: var(--mint) !important;
+  font-weight: 700;
+}
+
+div#cgit table.ssdiff td.del {
+  background: rgba(255,50,50,0.15);
+  color: var(--text) !important;
+}
+
+div#cgit table.ssdiff td.del_dark {
+  background: rgba(255,50,50,0.08);
+  color: var(--text) !important;
+}
+
+div#cgit table.ssdiff span.del {
+  background: rgba(255,50,50,0.35);
+  color: var(--pink) !important;
+  font-weight: 700;
+}
+
+div#cgit table.ssdiff td.changed {
+  background: rgba(255,235,59,0.1);
+  color: var(--text) !important;
+}
+
+div#cgit table.ssdiff td.changed_dark {
+  background: rgba(255,235,59,0.05);
+  color: var(--text) !important;
+}
+
+div#cgit table.ssdiff td.lineno {
+  background: var(--panel);
+  color: var(--text-dim) !important;
+  text-align: right;
+  width: 40px;
+  padding: 2px 6px;
+  user-select: none;
+  border-right: 2px solid var(--magenta);
+}
+
+div#cgit table.ssdiff td.lineno a {
+  color: var(--text-dim) !important;
+  text-decoration: none;
+}
+
+div#cgit table.ssdiff td.lineno a:hover {
+  color: var(--cyan) !important;
+}
+
+div#cgit table.ssdiff td.hunk {
+  background: rgba(0,255,255,0.15);
+  color: var(--cyan) !important;
+  border-top: 2px solid var(--cyan);
+  border-bottom: 2px solid var(--cyan);
+  font-weight: 700;
+  padding: 4px 8px;
+}
+
+div#cgit table.ssdiff td.head {
+  background: rgba(255,158,128,0.15);
+  color: var(--peach) !important;
+  border-top: 2px solid var(--peach);
+  border-bottom: 2px solid var(--peach);
+  font-weight: 900;
+  padding: 4px 8px;
+  text-transform: uppercase;
+}
+
+/* ---------- Badges ---------- */
+div#cgit a.branch-deco,
+div#cgit a.tag-deco,
+div#cgit a.tag-annotated-deco,
+div#cgit a.remote-deco,
+div#cgit a.deco {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0 4px;
+  font-size: 10px;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 2px solid;
+}
+
+div#cgit a.branch-deco {
+  background: var(--mint);
+  color: #000 !important;
+  border-color: var(--mint);
+}
+
+div#cgit a.branch-deco:hover {
+  background: #000;
+  color: var(--mint) !important;
+}
+
+div#cgit a.tag-deco {
+  background: var(--yellow);
+  color: #000 !important;
+  border-color: var(--yellow);
+}
+
+div#cgit a.tag-deco:hover {
+  background: #000;
+  color: var(--yellow) !important;
+}
+
+div#cgit a.tag-annotated-deco {
+  background: var(--peach);
+  color: #000 !important;
+  border-color: var(--peach);
+}
+
+div#cgit a.tag-annotated-deco:hover {
+  background: #000;
+  color: var(--peach) !important;
+}
+
+div#cgit a.remote-deco {
+  background: var(--cyan);
+  color: #000 !important;
+  border-color: var(--cyan);
+}
+
+div#cgit a.remote-deco:hover {
+  background: #000;
+  color: var(--cyan) !important;
+}
+
+div#cgit a.deco {
+  background: var(--lilac);
+  color: #000 !important;
+  border-color: var(--lilac);
+}
+
+div#cgit a.deco:hover {
+  background: #000;
+  color: var(--lilac) !important;
+}
+
+/* ---------- Buttons ---------- */
+div#cgit a.button {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #000;
+  color: var(--aqua) !important;
+  text-decoration: none;
+  border: 2px solid var(--aqua);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 2px;
+}
+
+div#cgit a.button:hover {
+  background: var(--aqua);
+  color: #000 !important;
+}
+
+/* Different button colors based on href */
+div#cgit a.button[href*="/log/"] {
+  border-color: var(--mint);
+  color: var(--mint) !important;
+}
+
+div#cgit a.button[href*="/log/"]:hover {
+  background: var(--mint);
+  color: #000 !important;
+}
+
+div#cgit a.button[href*="/tree/"] {
+  border-color: var(--yellow);
+  color: var(--yellow) !important;
+}
+
+div#cgit a.button[href*="/tree/"]:hover {
+  background: var(--yellow);
+  color: #000 !important;
+}
+
+div#cgit a.primary {
+  background: var(--aqua);
+  color: #000 !important;
+  border: 2px solid var(--aqua);
+  padding: 8px 16px;
+  font-weight: 900;
+}
+
+div#cgit a.primary:hover {
+  background: #000;
+  color: var(--aqua) !important;
+}
+
+div#cgit a.secondary {
+  background: #000;
+  color: var(--cyan) !important;
+  border: 2px solid var(--cyan);
+}
+
+div#cgit a.secondary:hover {
+  background: var(--cyan);
+  color: #000 !important;
+}
+
+/* ---------- Pager ---------- */
+div#cgit ul.pager {
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  background: var(--panel);
+  border-top: 2px solid var(--lilac);
+}
+
+div#cgit ul.pager li {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+div#cgit ul.pager a {
+  display: inline-block;
+  padding: 6px 12px;
+  color: var(--lilac) !important;
+  text-decoration: none;
+  border: 2px solid var(--lilac);
+  background: #000;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+div#cgit ul.pager a:hover {
+  background: var(--lilac);
+  color: #000 !important;
+}
+
+div#cgit ul.pager .current {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--lilac);
+  color: #000 !important;
+  font-weight: 900;
+  font-size: 11px;
+}
+
+/* ---------- Age Indicators ---------- */
+div#cgit span.age-mins { 
+  color: var(--mint) !important;
+  font-weight: 900;
+}
+
+div#cgit span.age-hours { 
+  color: var(--cyan) !important;
+  font-weight: 700;
+}
+
+div#cgit span.age-days { 
+  color: var(--yellow) !important;
+}
+
+div#cgit span.age-weeks,
+div#cgit span.age-months,
+div#cgit span.age-years { 
+  color: var(--text-dim) !important;
+}
+
+div#cgit span.insertions {
+  color: var(--mint) !important;
+  font-weight: 900;
+  background: rgba(0,255,159,0.2);
+  padding: 2px 6px;
+  margin: 0 2px;
+  border: 1px solid var(--mint);
+}
+
+div#cgit span.deletions {
+  color: var(--pink) !important;
+  font-weight: 900;
+  background: rgba(255,107,157,0.2);
+  padding: 2px 6px;
+  margin: 0 2px;
+  border: 1px solid var(--pink);
+}
+
+/* ---------- Footer ---------- */
+div#cgit div.footer {
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  color: var(--text-dim) !important;
+  font-size: 11px;
+}
+
+div#cgit div.footer a {
+  color: var(--cyan) !important;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+div#cgit div.footer a:hover {
+  color: var(--pink) !important;
+  text-decoration: underline;
+}
+
+/* ---------- SHA1 ---------- */
+div#cgit .sha1 {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim) !important;
+  background: #000;
+  padding: 2px 6px;
+  border: 1px solid var(--text-dim);
+}
+
+/* ---------- Error ---------- */
+div#cgit div.error {
+  color: var(--pink) !important;
+  background: rgba(255,107,157,0.2);
+  border: 3px solid var(--pink);
+  padding: 10px;
+  margin: 0 0;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* ---------- Downloads ---------- */
+div#cgit table#downloads {
+  float: right;
+  background: var(--panel);
+  border: 2px solid var(--yellow);
+  margin: 0 0 10px 10px;
+}
+
+div#cgit table#downloads th {
+  background: #000;
+  color: var(--yellow) !important;
+  padding: 6px 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  border-bottom: 2px solid var(--yellow);
+}
+
+div#cgit table#downloads td {
+  padding: 6px 10px;
+  border-top: 1px solid #1a1a1f;
+}
+
+/* ---------- Stats ---------- */
+div#cgit table.stats {
+  width: 100%;
+  background: var(--panel);
+  border: 2px solid var(--aqua);
+  margin: 10px 0;
+  border-collapse: collapse;
+}
+
+div#cgit table.stats th {
+  background: #000;
+  padding: 6px 10px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--aqua) !important;
+  border-bottom: 2px solid var(--aqua);
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+div#cgit table.stats td {
+  padding: 6px 10px;
+  text-align: right;
+  border-bottom: 1px solid #1a1a1f;
+  color: var(--text) !important;
+  font-size: 12px;
+}
+
+div#cgit table.stats tr:hover {
+  background: #1a1a25;
+}
+
+div#cgit table.stats td.total {
+  font-weight: 900;
+  text-align: left;
+  color: var(--peach) !important;
+}
+
+div#cgit table.stats td.sum {
+  color: var(--aqua) !important;
+  font-weight: 900;
+}
+
+/* ---------- Markdown ---------- */
+div#cgit .markdown-body {
+  color: var(--text) !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  padding: 10px !important;
+  background: var(--panel) !important;
+  border: 2px solid var(--pink) !important;
+}
+
+div#cgit .markdown-body h1,
+div#cgit .markdown-body h2,
+div#cgit .markdown-body h3,
+div#cgit .markdown-body h4,
+div#cgit .markdown-body h5,
+div#cgit .markdown-body h6 {
+  margin: 10px 0 8px 0 !important;
+  font-weight: 900 !important;
+  line-height: 1.2 !important;
+  padding: 6px 0 !important;
+  border-bottom: 2px solid !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+div#cgit .markdown-body h1 { 
+  font-size: 20px !important;
+  color: var(--peach) !important;
+  border-color: var(--peach) !important;
+}
+
+div#cgit .markdown-body h2 { 
+  font-size: 18px !important;
+  color: var(--lilac) !important;
+  border-color: var(--lilac) !important;
+}
+
+div#cgit .markdown-body h3 { 
+  font-size: 16px !important;
+  color: var(--cyan) !important;
+  border-color: var(--cyan) !important;
+}
+
+div#cgit .markdown-body h4 { 
+  font-size: 14px !important;
+  color: var(--mint) !important;
+  border-color: var(--mint) !important;
+}
+
+div#cgit .markdown-body h5 { 
+  font-size: 12px !important;
+  color: var(--yellow) !important;
+  border-color: var(--yellow) !important;
+}
+
+div#cgit .markdown-body h6 { 
+  font-size: 11px !important;
+  color: var(--text-dim) !important;
+  border-color: var(--text-dim) !important;
+}
+
+div#cgit .markdown-body p {
+  margin-bottom: 8px !important;
+  color: var(--text) !important;
+}
+
+div#cgit .markdown-body a {
+  color: var(--cyan) !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+
+div#cgit .markdown-body a:hover {
+  color: var(--pink) !important;
+  text-decoration: underline !important;
+}
+
+div#cgit .markdown-body ul,
+div#cgit .markdown-body ol {
+  margin: 8px 0 !important;
+  padding-left: 20px !important;
+}
+
+div#cgit .markdown-body li {
+  margin: 4px 0 !important;
+  color: var(--text) !important;
+}
+
+div#cgit .markdown-body code {
+  padding: 2px 6px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  background: #000 !important;
+  border: 1px solid var(--pink) !important;
+  color: var(--pink) !important;
+}
+
+div#cgit .markdown-body pre {
+  padding: 10px !important;
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  background: #000 !important;
+  border: 2px solid var(--mint) !important;
+  overflow-x: auto !important;
+  margin: 8px 0 !important;
+  line-height: 1.4 !important;
+}
+
+div#cgit .markdown-body pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  color: var(--text) !important;
+}
+
+div#cgit .markdown-body blockquote {
+  margin: 8px 0 !important;
+  padding: 8px 10px !important;
+  background: rgba(176,132,255,0.1) !important;
+  border-left: 4px solid var(--lilac) !important;
+  color: var(--lilac) !important;
+}
+
+div#cgit .markdown-body table {
+  width: 100% !important;
+  margin: 8px 0 !important;
+  border-collapse: collapse !important;
+  background: #000 !important;
+  border: 2px solid var(--aqua) !important;
+}
+
+div#cgit .markdown-body table th {
+  padding: 6px 8px !important;
+  background: var(--panel) !important;
+  color: var(--aqua) !important;
+  font-weight: 900 !important;
+  text-align: left !important;
+  border-bottom: 2px solid var(--aqua) !important;
+  text-transform: uppercase !important;
+  font-size: 11px !important;
+}
+
+div#cgit .markdown-body table td {
+  padding: 6px 8px !important;
+  border-bottom: 1px solid #1a1a1f !important;
+  color: var(--text) !important;
+}
+
+div#cgit .markdown-body table tr, div#cgit .markdown-body table tr:nth-child(2n) {
+  background-color: transparent !important;
+}
+
+div#cgit .markdown-body table tr:hover {
+  background: #1a1a25 !important;
+}
+
+div#cgit .markdown-body hr {
+  border: none !important;
+  border-top: 2px solid var(--border) !important;
+  margin: 16px 0 !important;
+}
+
+div#cgit .markdown-body img {
+  max-width: 100% !important;
+  border: 2px solid var(--pink) !important;
+  image-rendering: pixelated !important;
+}
+
+div#cgit .markdown-body strong {
+  font-weight: 900 !important;
+  color: var(--peach) !important;
+}
+
+div#cgit .markdown-body em {
+  font-style: italic !important;
+  color: var(--lilac) !important;
+}
+
+
+/* ---------- Focus ---------- */
+/* div#cgit *:focus {
+  outline: 2px solid var(--aqua) !important;
+  outline-offset: 2px !important;
+} */
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  div#cgit table#header td.main {
+    font-size: 24px;
+  }
+  
+  div#cgit table#header td.logo {
+    width: 60px;
+  }
+  
+  div#cgit table#header td.logo img {
+    width: 48px;
+    height: 48px;
+  }
+  
+  div#cgit table.list td {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+}
+
+/* ---------- Should have been the end of the world, but unfortunately it's end Of the theme ---------- */
