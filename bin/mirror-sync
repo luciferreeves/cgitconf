@@ -1,0 +1,21 @@
+#!/bin/bash
+
+REPO_DIR="/root/shifoogit/repos"
+
+echo "Syncing all mirrors in $REPO_DIR"
+
+for repo in "$REPO_DIR"/*; do
+    if [ -d "$repo" ] && [ -f "$repo/config" ]; then
+        echo "Updating $(basename "$repo") ..."
+
+        setpriv --reuid 1000 --regid 1000 --clear-groups git -C "$repo" remote update --prune
+
+        # Update agefile
+        LAST_COMMIT=$(git -C "$repo" log -1 --format="%ci")
+        mkdir -p "$repo/info/web"
+        echo "$LAST_COMMIT" > "$repo/info/web/last-modified"
+        chown -R 1000:1000 "$repo/info"
+    fi
+done
+
+echo "All mirrors updated."
