@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Directory where mirrors are stored
+REPO_DIR="/root/shifoogit/repos"
+CREDS_FILE="/root/shifoogit/.git-creds/credentials"
+
+# ---- Check input ----
+if [ -z "$1" ]; then
+    echo "Usage: mirror <github-url>"
+    exit 1
+fi
+
+URL="$1"
+
+# ---- Check GitHub Token ----
+if [ -z "$GITHUB_TOKEN" ]; then
+    echo "Error: GITHUB_TOKEN not set."
+    echo "Run: export GITHUB_TOKEN=ghp_xxxxxxxxxxxxx"
+    exit 1
+fi
+
+# ---- Ensure credentials file exists ----
+if [ ! -f "$CREDS_FILE" ]; then
+    echo "ERROR: Credentials file not found at:"
+    echo "  $CREDS_FILE"
+    echo
+    echo "Create it with:"
+    echo "  mkdir -p /root/shifoogit/.git-creds"
+    echo "  echo \"https://USERNAME:TOKEN@github.com\" > $CREDS_FILE"
+    echo "  chmod 600 $CREDS_FILE"
+    exit 1
+fi
+
+# Git should use the custom credentials file
+git config --global credential.helper "store --file=$CREDS_FILE"
+
+# ---- Extract owner + repo ----
+OWNER=$(echo "$URL" | sed -E 's#https?://github.com/([^/]+)/.*#\1#')
+REPO_NAME=$(basename "$URL" .git)
+TARGET="$REPO_DIR/${REPO_NAME}"
+
+# ---- Check for existing mirror ----
+if [ -d "$TARGET" ]; then
+    echo "Error: Mirror already exists: $TARGET"
+    exit 1
+fi
+
+echo "Mirroring $URL ..."
+
+# Create mirror as UID 1000
+setpriv --reuid 1000 --regid 1000 --clear-groups \
+    git clone --mirror "$URL" "$TARGET"
+
+if [ $? -ne 0 ]; then
+    echo "❌ Failed to mirror $URL"
+    exit 1
+fi
+
+# ---- Fetch metadata from GitHub ----
+API_URL="https://api.github.com/repos/$OWNER/$REPO_NAME"
+JSON=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "$API_URL")
+
+DESC=$(echo "$JSON" | jq -r '.description // "No description provided."')
+
+# ---- Write repo description ----
+echo "$DESC" > "$TARGET/description"
+chown 1000:1000 "$TARGET/description"
+
+# ---- Write last-modified using latest commit timestamp ----
+LAST_COMMIT=$(git -C "$TARGET" log -1 --format="%ci")
+
+mkdir -p "$TARGET/info/web"
+echo "$LAST_COMMIT" > "$TARGET/info/web/last-modified"
+
+chown -R 1000:1000 "$TARGET/info"
+
+echo
+echo "✔ Mirror created successfully"
+echo "✔ Repo metadata written"
+echo "✔ last-modified generated: $LAST_COMMIT_DATE"
+echo
+echo "View in CGit:"
+echo "  https://git.shi.foo/$REPO_NAME"
