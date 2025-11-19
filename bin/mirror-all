@@ -1,0 +1,81 @@
+#!/bin/bash
+
+REPO_DIR="/root/shifoogit/repos"
+
+# ---- Check GitHub Token ----
+if [ -z "$GITHUB_TOKEN" ]; then
+    echo "Error: GITHUB_TOKEN not set."
+    echo "Run: export GITHUB_TOKEN=ghp_xxxxxxxxxxxxx"
+    exit 1
+fi
+
+# ---- Detect GitHub username from token ----
+echo "Fetching GitHub username..."
+USER_JSON=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/user)
+USERNAME=$(echo "$USER_JSON" | grep -E '"login":' | head -1 | sed -E 's/.*"login": "(.*)".*/\1/')
+
+if [ -z "$USERNAME" ]; then
+    echo "❌ Failed to fetch GitHub username. Check your token."
+    exit 1
+fi
+
+echo "✔ Found username: $USERNAME"
+echo
+
+# ---- Fetch all PUBLIC repos owned by this user ----
+echo "Fetching public repository list..."
+ALL_REPOS=""
+PAGE=1
+
+while true; do
+    # FIXED URL: use /users/<username>/repos + type=public
+    REPOS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+        "https://api.github.com/users/$USERNAME/repos?per_page=100&page=$PAGE&type=public&sort=updated&direction=asc")
+
+    # If empty array returned, stop
+    if echo "$REPOS" | grep -q "\[\]"; then
+        break
+    fi
+
+    ALL_REPOS="$ALL_REPOS$REPOS"
+    PAGE=$((PAGE + 1))
+
+    # Stop if < 100 repos returned → last page
+    if [ "$(echo "$REPOS" | grep -c '"clone_url"')" -lt 100 ]; then
+        break
+    fi
+done
+
+# ---- Extract clone URLs from JSON ----
+CLONE_URLS=$(echo "$ALL_REPOS" | grep '"clone_url":' | sed -E 's/.*"clone_url": "(.*)",/\1/')
+
+if [ -z "$CLONE_URLS" ]; then
+    echo "❌ No public repositories found"
+    exit 1
+fi
+
+TOTAL=$(echo "$CLONE_URLS" | wc -l)
+echo "✔ Found $TOTAL public repositories (owned by you)"
+echo
+
+# ---- Mirror each repo ----
+COUNT=0
+while IFS= read -r url; do
+    COUNT=$((COUNT + 1))
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "[$COUNT/$TOTAL] Mirroring: $url"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    
+    mirror "$url"
+    
+    if [ $? -eq 0 ]; then
+        echo "✔ Success"
+    else
+        echo "⚠ Failed (may already exist)"
+    fi
+    echo
+done <<< "$CLONE_URLS"
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✔ All repositories processed: $COUNT/$TOTAL"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
