@@ -1,0 +1,15 @@
+[Unit]
+Description=GitHub Webhook Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/github-webhook-server
+Restart=always
+RestartSec=1
+User=root
+Environment=GODEBUG=http2server=0
+Environment="GITHUB_TOKEN=LMAO_NO_SECRETS_HERE"
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+
+[Install]
+WantedBy=multi-user.target
