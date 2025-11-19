@@ -1,0 +1,94 @@
+# CGit config file (cgitrc)
+# For all supported settings see https://linux.die.net/man/5/cgitrc
+
+root-title=Shifoo's Git
+root-desc=Welcome to my little corner of the internet where mirrors, experiments, toys, and questionable coding decisions live together in harmony.
+root-readme=/srv/git/about.html
+
+source-filter=/usr/lib/cgit/filters/syntax-highlighting.py
+about-filter=/usr/lib/cgit/filters/about-formatting.sh
+agefile=info/web/last-modified
+head-include=/etc/cgit/head-include.html
+
+#
+# Search for these files in the root of the default branch of repositories
+# for coming up with the about page:
+#
+readme=:README.md
+readme=:readme.md
+readme=:README.mkd
+readme=:readme.mkd
+readme=:README.rst
+readme=:readme.rst
+readme=:README.html
+readme=:readme.html
+readme=:README.htm
+readme=:readme.htm
+readme=:README.txt
+readme=:readme.txt
+readme=:README
+readme=:readme
+readme=:INSTALL.md
+readme=:install.md
+readme=:INSTALL.mkd
+readme=:install.mkd
+readme=:INSTALL.rst
+readme=:install.rst
+readme=:INSTALL.html
+readme=:install.html
+readme=:INSTALL.htm
+readme=:install.htm
+readme=:INSTALL.txt
+readme=:install.txt
+readme=:INSTALL
+readme=:install
+
+# Default Theme
+css=/cgit.css
+logo=/cgit.png
+
+
+# Cache
+cache-root=/var/cache/cgit
+cache-size=0
+
+enable-index-links=1
+enable-index-owner=0
+enable-remote-branches=1
+enable-log-filecount=1
+enable-log-linecount=1
+enable-git-config=1
+snapshots=tar.xz zip
+
+robots=noindex, nofollow
+
+# VROOT — you didn’t override it, so keeping "/"
+virtual-root=/
+
+# Section grouping — keeping default
+section-from-path=1
+
+# Max repos — using default from env, safe to keep high
+max-repo-count=2000
+
+# Where to scan for repositories
+scan-path=/srv/git
+
+repository-sort=age
+enable-clone-info=1
+enable-summary-owner=1
+enable-summary-branches=1
+enable-summary-tags=1
+enable-index-links=1
+enable-commit-graph=1
+enable-commit-graph-link=1
+readme=:LICENSE
+readme=:LICENSE.md
+source-tabsize=4
+section=Archived
+section=Active
+source-filter-requires-readme=0
+source-markup=1
+enable-blame=0
+enable-log-filecount=0
+enable-log-linecount=0
