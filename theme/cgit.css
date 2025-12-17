@@ -1374,6 +1374,65 @@ div#cgit .markdown-body em {
   color: var(--lilac) !important;
 }
 
+/* ---------- Image Blob Rendering ---------- */
+div#cgit .cgit-image-preview {
+  padding: 10px;
+  background: #000;
+  border-bottom: 2px solid var(--pink);
+  text-align: center;
+}
+
+div#cgit .cgit-image-preview img {
+  max-width: 100%;
+  max-height: 70vh;
+  border: 3px solid var(--aqua);
+  background: #000;
+  image-rendering: auto;
+}
+
+/* ---------- Collapsible Hex Dump ---------- */
+div#cgit details.cgit-hexdump {
+  border-top: 2px solid var(--mint);
+}
+
+div#cgit details.cgit-hexdump summary {
+  cursor: pointer;
+  padding: 8px 10px;
+  background: var(--panel);
+  color: var(--mint);
+  font-family: var(--mono);
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--mint);
+}
+
+div#cgit details.cgit-hexdump[open] summary {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+div#cgit details.cgit-hexdump summary::marker {
+  color: var(--mint);
+}
+
+/* Placeholder to lock layout during blob enhancement */
+div#cgit .cgit-blob-placeholder {
+  width: 100%;
+}
+
+/* Prevent layout shift while enhancing blobs */
+div#cgit div.content.cgit-enhancing {
+  visibility: hidden;
+}
+
+div#cgit div.content.cgit-enhanced {
+  visibility: visible;
+}
+
+/* Prevent hex dump from affecting initial layout */
+div#cgit table.bin-blob {
+  display: none;
+}
 
 /* ---------- Focus ---------- */
 /* div#cgit *:focus {
