@@ -1,66 +1,146 @@
 <script>
 (function () {
-  onReady(fixCgitMarkdownImages);
-  onReady(linkifyCgitSubtitles);
+  onReady(() => {
+    fixCgitMarkdownImages();
+    linkifyCgitSubtitles();
+    enhanceBlobPreview();
+  });
 
   /**
-   * Runs a callback when DOM is ready.
-   * @param {Function} fn
+   * Runs a callback once the DOM is ready.
+   * @param {() => void} fn
    */
   function onReady(fn) {
-    document.readyState === "loading"
-      ? document.addEventListener("DOMContentLoaded", fn, { once: true })
-      : fn();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn, { once: true });
+    } else {
+      fn();
+    }
   }
 
   /**
    * Rewrites relative image URLs in cgit README ("about") pages
-   * to use /<repo>/plain/<path>.
+   * to use /<repo>/plain/<path>, so images render correctly.
    */
   function fixCgitMarkdownImages() {
     const parts = location.pathname.split("/").filter(Boolean);
+    // Expected path: /<repo>/about/
     if (parts[1] !== "about") return;
 
-    const base =
-      location.origin + "/" + parts[0] + "/plain/";
-
+    const baseUrl = `${location.origin}/${parts[0]}/plain/`;
     const container = document.querySelector(".markdown-body");
     if (!container) return;
 
     container.querySelectorAll("img[src]").forEach(img => {
       const src = img.getAttribute("src");
-      if (
-        !src ||
-        src.startsWith("http://") ||
-        src.startsWith("https://") ||
-        src.startsWith("//") ||
-        src.startsWith("data:") ||
-        src.startsWith("#")
-      ) {
-        return;
-      }
+      if (!isRelativeUrl(src)) return;
 
-      img.src = base + src.replace(/^\.?\//, "");
+      img.src = baseUrl + src.replace(/^\.?\//, "");
     });
   }
 
   /**
-   * Converts plain-text URLs in repository subtitles into clickable links.
+   * Converts plain-text URLs in repository subtitle cells
+   * (<td class="sub">) into clickable links.
    */
   function linkifyCgitSubtitles() {
-    const urlRe = /\bhttps?:\/\/[^\s<]+/g;
+    const urlRegex = /\bhttps?:\/\/[^\s<]+/g;
 
     document.querySelectorAll("td.sub").forEach(sub => {
       if (sub.querySelector("a")) return;
 
       const text = sub.textContent;
-      if (!text || !urlRe.test(text)) return;
+      if (!text || !urlRegex.test(text)) return;
 
-      urlRe.lastIndex = 0;
-      sub.innerHTML = text.replace(urlRe, url =>
+      urlRegex.lastIndex = 0;
+      sub.innerHTML = text.replace(urlRegex, url =>
         `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
       );
     });
+  }
+
+  /**
+   * Replaces binary image hex dumps with rendered image previews.
+   * The hex dump is moved into a <details> block below the image.
+   */
+  function enhanceBlobPreview() {
+    const content = document.querySelector("div.content");
+    const binBlob = document.querySelector("table.bin-blob");
+    const plainLink = document.querySelector('a[href*="/plain/"]');
+
+    if (!content || !binBlob || !plainLink) return;
+
+    const url = plainLink.getAttribute("href");
+    const ext = getFileExtension(url);
+
+    if (!isSupportedImage(ext)) {
+      binBlob.style.display = "table";
+      return;
+    }
+
+    const img = new Image();
+    img.src = url;
+    img.alt = "Rendered image";
+
+    img.onload = () => {
+      // Image preview
+      const preview = document.createElement("div");
+      preview.className = "cgit-image-preview";
+      preview.appendChild(img);
+
+      // Insert preview before hex dump
+      content.insertBefore(preview, binBlob);
+
+      // Wrap hex dump in <details>
+      const details = document.createElement("details");
+      details.className = "cgit-hexdump";
+
+      const summary = document.createElement("summary");
+      summary.textContent = "Show hex dump";
+
+      binBlob.style.display = "table";
+
+      details.appendChild(summary);
+      details.appendChild(binBlob);
+      content.appendChild(details);
+    };
+  }
+
+  /**
+   * Returns true if a URL is relative and safe to rewrite.
+   * @param {string|null} url
+   * @returns {boolean}
+   */
+  function isRelativeUrl(url) {
+    return Boolean(
+      url &&
+      !url.startsWith("http://") &&
+      !url.startsWith("https://") &&
+      !url.startsWith("//") &&
+      !url.startsWith("data:") &&
+      !url.startsWith("#")
+    );
+  }
+
+  /**
+   * Extracts the lowercase file extension from a URL.
+   * @param {string} url
+   * @returns {string}
+   */
+  function getFileExtension(url) {
+    return url.split(".").pop().toLowerCase();
+  }
+
+  /**
+   * Checks whether a file extension is a browser-renderable image.
+   * @param {string} ext
+   * @returns {boolean}
+   */
+  function isSupportedImage(ext) {
+    return new Set([
+      "png", "jpg", "jpeg", "gif", "webp",
+      "bmp", "svg", "ico", "avif"
+    ]).has(ext);
   }
 })();
 </script>
