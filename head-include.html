@@ -64,11 +64,14 @@
    * The hex dump is moved into a <details> block below the image.
    */
   function enhanceBlobPreview() {
-    const content = document.querySelector("div.content");
     const binBlob = document.querySelector("table.bin-blob");
-    const plainLink = document.querySelector('a[href*="/plain/"]');
+    if (!binBlob) return;
 
-    if (!content || !binBlob || !plainLink) return;
+    const plainLink = document.querySelector('a[href*="/plain/"]');
+    if (!plainLink) {
+      binBlob.style.display = "table";
+      return;
+    }
 
     const url = plainLink.getAttribute("href");
     const ext = getFileExtension(url);
@@ -78,20 +81,23 @@
       return;
     }
 
+    const content = document.querySelector("div.content");
+    if (!content) {
+      binBlob.style.display = "table";
+      return;
+    }
+
     const img = new Image();
     img.src = url;
     img.alt = "Rendered image";
 
     img.onload = () => {
-      // Image preview
       const preview = document.createElement("div");
       preview.className = "cgit-image-preview";
       preview.appendChild(img);
 
-      // Insert preview before hex dump
       content.insertBefore(preview, binBlob);
 
-      // Wrap hex dump in <details>
       const details = document.createElement("details");
       details.className = "cgit-hexdump";
 
